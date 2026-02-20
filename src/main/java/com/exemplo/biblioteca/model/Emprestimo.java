@@ -29,7 +29,12 @@ public class Emprestimo {
         this.dataDevolução = dataDevolução;
     }
 
-    public Emprestimo(int id, int livro_id, int usuario_id, Date dataEmprestimo) {
+    public Emprestimo(int livro_id, int usuario_id, Date dataEmprestimo) {
+        this.livro_id = livro_id;
+        this.usuario_id = usuario_id;
+        this.dataEmprestimo = dataEmprestimo;
+    }
+    public Emprestimo(int id ,int livro_id, int usuario_id, Date dataEmprestimo) {
         this.id = id;
         this.livro_id = livro_id;
         this.usuario_id = usuario_id;
