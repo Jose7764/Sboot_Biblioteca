@@ -1,5 +1,7 @@
 package com.exemplo.biblioteca.controller;
 
+import com.exemplo.biblioteca.dto.Emprestimo.EmprestimoResponseDto;
+import com.exemplo.biblioteca.dto.Emprestimo.EmprestimoResquestDto;
 import com.exemplo.biblioteca.model.Emprestimo;
 import com.exemplo.biblioteca.service.EmprestimoService;
 import org.springframework.http.HttpStatus;
@@ -20,7 +22,7 @@ public class EmprestimoController {
     }
 
     @PostMapping
-    public Emprestimo inserirEmprestimo(@RequestBody Emprestimo emprestimo)throws SQLException{
+    public EmprestimoResponseDto inserirEmprestimo(@RequestBody EmprestimoResquestDto emprestimo)throws SQLException{
 
         try{
             return service.salvarEmprestimo(emprestimo);
@@ -31,7 +33,7 @@ public class EmprestimoController {
     }
 
     @GetMapping
-    public List<Emprestimo> buscarTodos(){
+    public List<EmprestimoResponseDto> buscarTodos(){
         try{
             return service.buscarTodos();
         } catch (SQLException e){
@@ -40,7 +42,7 @@ public class EmprestimoController {
     }
 
     @GetMapping("/{id}")
-    public Emprestimo buscarPorId(@PathVariable int id){
+    public EmprestimoResponseDto buscarPorId(@PathVariable int id){
         try{
             return service.buscarPorId(id);
         } catch (SQLException e){
@@ -49,7 +51,7 @@ public class EmprestimoController {
     }
 
     @PutMapping("/{id}")
-    public Emprestimo atualizarDataEmprestimo(@PathVariable int id, @RequestBody Emprestimo emprestimo){
+    public EmprestimoResponseDto atualizarDataEmprestimo(@PathVariable int id, @RequestBody EmprestimoResquestDto emprestimo){
         try{
             return service.atualizarDataEmprestimo(id, emprestimo);
         } catch (SQLException e){
@@ -58,7 +60,7 @@ public class EmprestimoController {
     }
 
     @PutMapping("/{id}/devolucao")
-    public Emprestimo atualizarDataDevolucao(@PathVariable int id, @RequestBody Emprestimo emprestimo){
+    public EmprestimoResponseDto atualizarDataDevolucao(@PathVariable int id, @RequestBody Emprestimo emprestimo){
         try{
             return service.atualizarDataDevolucao(id, emprestimo);
         } catch (SQLException e){

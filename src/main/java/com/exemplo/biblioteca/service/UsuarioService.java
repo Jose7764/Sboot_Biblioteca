@@ -1,6 +1,8 @@
 package com.exemplo.biblioteca.service;
 
 import com.exemplo.biblioteca.dao.UsuarioDAO;
+import com.exemplo.biblioteca.dto.Usuario.UsuarioResponseDto;
+import com.exemplo.biblioteca.mapper.UsuarioMapper;
 import com.exemplo.biblioteca.model.Usuario;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +13,29 @@ import java.util.List;
 public class UsuarioService {
 
     private final UsuarioDAO repository;
+    private final UsuarioMapper mapper;
 
-    public UsuarioService(UsuarioDAO repository){
+    public UsuarioService(UsuarioDAO repository, UsuarioMapper mapper){
+        this.mapper = mapper;
         this.repository = repository;
     }
 
-    public Usuario salvarUsuario(Usuario user) throws SQLException {
-        return repository.inserirUser(user);
+    public UsuarioResponseDto salvarUsuario(Usuario user) throws SQLException {
+        return mapper.toResponse(repository.inserirUser(user));
     }
 
-    public List<Usuario> listarUsuarios()throws SQLException{
-        return repository.listarUsuarios();
+    public List<UsuarioResponseDto> listarUsuarios()throws SQLException{
+        return repository.listarUsuarios().stream()
+                                          .map(mapper::toResponse)
+                                          .toList();
     }
 
-    public Usuario listarUserPorId(int id)throws SQLException{
-        return repository.listarUserPorId(id);
+    public UsuarioResponseDto listarUserPorId(int id)throws SQLException{
+        return mapper.toResponse(repository.listarUserPorId(id));
     }
 
-    public Usuario atualizarUser(int id, Usuario user)throws SQLException{
-        return repository.atualizarUser(id ,user);
+    public UsuarioResponseDto atualizarUser(int id, Usuario user)throws SQLException{
+        return mapper.toResponse(repository.atualizarUser(id ,user));
     }
 
     public void deletarUser(int id)throws SQLException{

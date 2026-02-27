@@ -1,5 +1,7 @@
 package com.exemplo.biblioteca.controller;
 
+import com.exemplo.biblioteca.dto.Usuario.UsuarioRequestDto;
+import com.exemplo.biblioteca.dto.Usuario.UsuarioResponseDto;
 import com.exemplo.biblioteca.model.Usuario;
 import com.exemplo.biblioteca.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario inserirUsuario(@RequestBody Usuario user){
+    public UsuarioResponseDto inserirUsuario(@RequestBody Usuario user){
 
         try {
             return service.salvarUsuario(user);
@@ -29,7 +31,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<Usuario> listarUsuarios(){
+    public List<UsuarioResponseDto> listarUsuarios(){
         try {
             return service.listarUsuarios();
         }catch (SQLException e){
@@ -39,7 +41,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Usuario listarusuarioPorId(@PathVariable int id){
+    public UsuarioResponseDto listarusuarioPorId(@PathVariable int id){
         try {
             return service.listarUserPorId(id);
         }catch (SQLException e){
@@ -49,7 +51,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public Usuario atualizarUsuario(@PathVariable int id, @RequestBody Usuario user){
+    public UsuarioResponseDto atualizarUsuario(@PathVariable int id, @RequestBody Usuario user){
         try {
             return service.atualizarUser(id , user);
         }catch (SQLException e){
